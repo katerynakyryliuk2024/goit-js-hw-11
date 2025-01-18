@@ -1,7 +1,7 @@
 import iziToast from "izitoast";
 import "izitoast/dist/css/iziToast.min.css";
 
-fetch('https://pixabay.com/api/?key=48282241-c94e9d668c7a92092d53abf55&per_page=9&image_type=photo&orientation=horizontal&safesearch=true')
+fetch('https://pixabay.com/api/?key=48282241-c94e9d668c7a92092d53abf55&per_page=9&image_type=photo&orientation=horizontal&safesearch=true&q=cat')
     .then(response => {
   console.log(response);
 

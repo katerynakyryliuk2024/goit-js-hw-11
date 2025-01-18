@@ -88,3 +88,8 @@ gap: 8px;
 .form-button:focus{
 background-color:#6c8cff;
 }
+.gallery{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+}
