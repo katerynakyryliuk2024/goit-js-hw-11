@@ -35,7 +35,7 @@ button,input {
   line-height: inherit;
 }
 
-* {
+*,::before,::after {
   box-sizing: border-box;
 }
 
