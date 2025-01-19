@@ -22,7 +22,14 @@ const createGalleryCardTemplate = imgİnfo => {
 const onSearchFormSubmit = event => {
     event.preventDefault();
 
-    const searchedQuery = event.currentTarget.elements.search_input.value;
+    const searchedQuery = event.currentTarget.elements.search_input.value.trim();
+    if (searchedQuery==='') {
+       iziToast.warning({
+    title: 'Caution',
+    message: 'You forgot to full fill searching area',
+       }); 
+        return;
+    }
 
     fetch(`https://pixabay.com/api/?key=48282241-c94e9d668c7a92092d53abf55&q=${searchedQuery}&per_page=9&image_type=photo&orientation=horizontal&safesearch=true`) 
     .then(response => {
@@ -37,9 +44,18 @@ const onSearchFormSubmit = event => {
         return response.json();
     })
         .then(data => {
+            if (data.hits.length===0) {
+                 iziToast.error({
+    title: 'Error',
+    message: "Sorry, there are no images matching your search query. Please try again!",
+                 });
+                galleryEl.innerHTML = '';
+                searchFormEl.reset();
+                return;
+            }
         
             const galleryTemplate = data.hits.map(el => createGalleryCardTemplate(el)).join('');
-            console.log(galleryTemplate);
+            galleryEl.innerHTML = galleryTemplate;
        
     })
     .catch(err => {
