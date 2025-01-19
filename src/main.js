@@ -13,8 +13,14 @@ const createGalleryCardTemplate = imgİnfo => {
     return `
     <li class='gallery-card'>
     <a class='gallery-link' href='${imgİnfo.largeImageURL}'>
-    <img class='galley-img' src='${imgİnfo.webformatURL}' alt='${imgİnfo.tags}' width='360' />
+    <img class='galley-img' src='${imgİnfo.webformatURL}' alt='${imgİnfo.tags}' width='360'  '/>
     </a>
+    <div class='description'>
+    <p>Likes: ${imgİnfo.likes}</p>
+    <p>Views: ${imgİnfo.views}</p> 
+    <p>Comments: ${imgİnfo.comments}</p>
+    <p> Downloads: ${imgİnfo.downloads}</p>
+    </div>
     </li>
     `;
 };
@@ -59,8 +65,8 @@ const onSearchFormSubmit = event => {
             const galleryTemplate = data.hits.map(el => createGalleryCardTemplate(el)).join('');
             galleryEl.innerHTML = galleryTemplate;
 
-            new SimpleLightbox('.gallery a', {});
-            galleryEl.refresh();
+            const gallerySLB = new SimpleLightbox('.gallery a', {});
+            gallerySLB.refresh();
        
     })
     .catch(err => {

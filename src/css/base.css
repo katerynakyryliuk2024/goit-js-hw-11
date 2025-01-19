@@ -89,8 +89,29 @@ gap: 8px;
 background-color:#6c8cff;
 }
 .gallery{
+  padding: 0;
+list-style: none;
   margin-top: 10px;
   display: flex;
   flex-wrap: wrap;
   gap: 24px;
+}
+.description{
+  display: flex;
+  flex-direction: row;
+  width: 360px;
+  height: 48px;
+}
+
+.gallery-card{
+  height: 200px;
+}
+
+img{
+  display: block;
+  max-width: 100%;
+  object-fit: cover;
+}
+.gallery.gallery-card{
+  width: calc((100%-48)/3);
 }
