@@ -1,41 +1,30 @@
 import iziToast from "izitoast";
 import "izitoast/dist/css/iziToast.min.css";
 
-// fetch('https://pixabay.com/api/?key=48282241-c94e9d668c7a92092d53abf55&per_page=9&image_type=photo&orientation=horizontal&safesearch=true&q=cat')
-//     .then(response => {
-//   console.log(response);
-
-//         if (!response.ok) {
-//             throw new Error(response.status);
-//         }
-      
-
-//         return response.json();
-//     })
-//     .then(data => {
-//         console.log(data);
-//     })
-//     .catch(err => {
-//         if (err.message === '404') {
-//               iziToast.error({
-//     title: 'Error',
-//     message: "Sorry, there are no images matching your search query. Please try again!",
-// });
-//         }
-//         console.log(err);
-//     });
 
 const searchFormEl = document.querySelector('.search-form');
 
 const galleryEl = document.querySelector('.gallery');
 console.log(galleryEl);
 
+const createGalleryCardTemplate = imgİnfo => {
+    return `
+    <li class='gallery-card'>
+    <a class='gallery-link' href='${imgİnfo.largeImageURL}'>
+    <img class='galley-img' src='${imgİnfo.webformatURL}' alt='${imgİnfo.tags}' width='360' />
+    </a>
+    </li>
+    `;
+};
+
+
+
 const onSearchFormSubmit = event => {
     event.preventDefault();
 
     const searchedQuery = event.currentTarget.elements.search_input.value;
 
-    fetch('https://pixabay.com/api/?key=48282241-c94e9d668c7a92092d53abf55&q=${searchedQuery}&per_page=9&image_type=photo&orientation=horizontal&safesearch=true') 
+    fetch(`https://pixabay.com/api/?key=48282241-c94e9d668c7a92092d53abf55&q=${searchedQuery}&per_page=9&image_type=photo&orientation=horizontal&safesearch=true`) 
     .then(response => {
   
         console.log(response);
@@ -47,8 +36,11 @@ const onSearchFormSubmit = event => {
 
         return response.json();
     })
-    .then(data => {
-        console.log(data);
+        .then(data => {
+        
+            const galleryTemplate = data.hits.map(el => createGalleryCardTemplate(el)).join('');
+            console.log(galleryTemplate);
+       
     })
     .catch(err => {
         if (err.message === '404') {
