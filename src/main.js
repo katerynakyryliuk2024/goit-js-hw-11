@@ -3,6 +3,8 @@ import "izitoast/dist/css/iziToast.min.css";
 import SimpleLightbox from "simplelightbox";
 import "simplelightbox/dist/simple-lightbox.min.css";
 
+import { createGalleryCardTemplate } from "./js/render-functions";
+
 
 const searchFormEl = document.querySelector('.search-form');
 
@@ -11,30 +13,14 @@ const galleryEl = document.querySelector('.gallery');
 const loader = document.querySelector('.loader');
 console.dir(loader);
 
-  //loader.style.display = 'none';
+  loader.style.display = 'inline-block';
 
-const createGalleryCardTemplate = imgİnfo => {
-    return `
-    <li class='gallery-card'>
-    <a class='gallery-link' href='${imgİnfo.largeImageURL}'>
-    <img class='galley-img' src='${imgİnfo.webformatURL}' alt='${imgİnfo.tags}' width='360'  '/>
-    </a>
-    <div class='description'>
-    <p>Likes: ${imgİnfo.likes}</p>
-    <p>Views: ${imgİnfo.views}</p> 
-    <p>Comments: ${imgİnfo.comments}</p>
-    <p> Downloads: ${imgİnfo.downloads}</p>
-    </div>
-    </li>
-    `;
-};
 
 
 
 const onSearchFormSubmit = event => {
     event.preventDefault();
     
-    //loader.style.display = 'inline-block';
     
     const searchedQuery = event.currentTarget.elements.search_input.value.trim();
     if (searchedQuery==='') {
@@ -48,6 +34,9 @@ const onSearchFormSubmit = event => {
     
 
     fetch(`https://pixabay.com/api/?key=48282241-c94e9d668c7a92092d53abf55&q=${searchedQuery}&per_page=9&image_type=photo&orientation=horizontal&safesearch=true`) 
+        .finally(() => {
+            loader.style.display = 'none';
+        })
     .then(response => {
   
         console.log(response);
@@ -75,7 +64,9 @@ const onSearchFormSubmit = event => {
 
             const gallerySLB = new SimpleLightbox('.gallery a', {captionsData: 'alt',
         captions: true,
-        captionDelay: 250,});
+            captionDelay: 250,
+            });
+           
             gallerySLB.refresh();
        
     })
