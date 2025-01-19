@@ -7,7 +7,11 @@ import "simplelightbox/dist/simple-lightbox.min.css";
 const searchFormEl = document.querySelector('.search-form');
 
 const galleryEl = document.querySelector('.gallery');
-console.log(galleryEl);
+
+const loader = document.querySelector('.loader');
+console.dir(loader);
+
+  loader.style.display = 'none';
 
 const createGalleryCardTemplate = imgİnfo => {
     return `
@@ -29,7 +33,9 @@ const createGalleryCardTemplate = imgİnfo => {
 
 const onSearchFormSubmit = event => {
     event.preventDefault();
-
+    
+    loader.style.display = 'inline-block';
+    
     const searchedQuery = event.currentTarget.elements.search_input.value.trim();
     if (searchedQuery==='') {
        iziToast.warning({
@@ -38,6 +44,8 @@ const onSearchFormSubmit = event => {
        }); 
         return;
     }
+
+    
 
     fetch(`https://pixabay.com/api/?key=48282241-c94e9d668c7a92092d53abf55&q=${searchedQuery}&per_page=9&image_type=photo&orientation=horizontal&safesearch=true`) 
     .then(response => {
@@ -65,7 +73,9 @@ const onSearchFormSubmit = event => {
             const galleryTemplate = data.hits.map(el => createGalleryCardTemplate(el)).join('');
             galleryEl.innerHTML = galleryTemplate;
 
-            const gallerySLB = new SimpleLightbox('.gallery a', {});
+            const gallerySLB = new SimpleLightbox('.gallery a', {captionsData: 'alt',
+        captions: true,
+        captionDelay: 250,});
             gallerySLB.refresh();
        
     })
