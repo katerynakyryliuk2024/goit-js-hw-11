@@ -34,7 +34,7 @@ const onSearchFormSubmit = event => {
 
     
 
-   fetchByQuery(searchedQuery)
+    fetchByQuery(searchedQuery)
         .then(data => {
             if (data.hits.length===0) {
                  iziToast.error({
