@@ -11,7 +11,7 @@ const galleryEl = document.querySelector('.gallery');
 const loader = document.querySelector('.loader');
 console.dir(loader);
 
-  loader.style.display = 'none';
+  //loader.style.display = 'none';
 
 const createGalleryCardTemplate = imgİnfo => {
     return `
@@ -34,7 +34,7 @@ const createGalleryCardTemplate = imgİnfo => {
 const onSearchFormSubmit = event => {
     event.preventDefault();
     
-    loader.style.display = 'inline-block';
+    //loader.style.display = 'inline-block';
     
     const searchedQuery = event.currentTarget.elements.search_input.value.trim();
     if (searchedQuery==='') {
