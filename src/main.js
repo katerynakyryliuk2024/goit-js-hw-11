@@ -59,7 +59,8 @@ const onSearchFormSubmit = event => {
             const galleryTemplate = data.hits.map(el => createGalleryCardTemplate(el)).join('');
             galleryEl.innerHTML = galleryTemplate;
 
-            new SimpleLightbox('.gallery a', {})
+            new SimpleLightbox('.gallery a', {});
+            galleryEl.refresh();
        
     })
     .catch(err => {
