@@ -1,5 +1,7 @@
 import iziToast from "izitoast";
 import "izitoast/dist/css/iziToast.min.css";
+import SimpleLightbox from "simplelightbox";
+import "simplelightbox/dist/simple-lightbox.min.css";
 
 
 const searchFormEl = document.querySelector('.search-form');
@@ -56,6 +58,8 @@ const onSearchFormSubmit = event => {
         
             const galleryTemplate = data.hits.map(el => createGalleryCardTemplate(el)).join('');
             galleryEl.innerHTML = galleryTemplate;
+
+            new SimpleLightbox('.gallery a', {})
        
     })
     .catch(err => {
