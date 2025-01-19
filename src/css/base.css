@@ -115,3 +115,8 @@ img{
 .gallery.gallery-card{
   width: calc((100%-48)/3);
 }
+.gallery-link{
+  display: block;
+  height: 200px;
+  width: 360px;
+}
