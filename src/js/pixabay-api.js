@@ -9,8 +9,6 @@ export const fetchByQuery = searchedQuery => {
             }
       
             return response.json();
-        })
-        .finally(() => {
-            loader.style.display = 'none';
         });
+      
 };
