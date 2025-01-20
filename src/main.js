@@ -14,7 +14,7 @@ const galleryEl = document.querySelector('.gallery');
 const loader = document.querySelector('.loader');
 console.dir(loader);
 
-  loader.style.display = 'inline-block';
+  //loader.style.display = 'inline-block';
 
 
 
@@ -33,7 +33,7 @@ const onSearchFormSubmit = event => {
     };
 
     
-    loader.style.display = 'inline-block';
+    //loader.style.display = 'inline-block';
     fetchByQuery(searchedQuery)
         .then(data => {
             if (data.hits.length===0) {
@@ -47,12 +47,12 @@ const onSearchFormSubmit = event => {
                 searchFormEl.reset();
                 return;
             }
-                loader.style.display = 'none';
+                //loader.style.display = 'none';
         
             const galleryTemplate = data.hits.map(el => createGalleryCardTemplate(el)).join('');
             galleryEl.innerHTML = galleryTemplate;
 
-            loader.style.display = 'none';
+           // loader.style.display = 'none';
 
             const gallerySLB = new SimpleLightbox('.gallery a', {captionsData: 'alt',
         captions: true,
