@@ -33,7 +33,7 @@ const onSearchFormSubmit = event => {
     };
 
     
-
+    loader.style.display = 'inline-block';
     fetchByQuery(searchedQuery)
         .then(data => {
             if (data.hits.length===0) {
@@ -42,12 +42,12 @@ const onSearchFormSubmit = event => {
     message: "Sorry, there are no images matching your search query. Please try again!",
                  });
                 
-                loader.style.display = 'inline-block';
                 
                 galleryEl.innerHTML = '';
                 searchFormEl.reset();
                 return;
             }
+                loader.style.display = 'none';
         
             const galleryTemplate = data.hits.map(el => createGalleryCardTemplate(el)).join('');
             galleryEl.innerHTML = galleryTemplate;
